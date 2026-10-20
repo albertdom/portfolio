@@ -249,6 +249,11 @@
           current = section.getAttribute('id');
         }
       });
+      // Si s'ha arribat (gairebé) al fons, forçar l'última secció: l'última
+      // secció no sempre pot arribar a la línia d'activació del scroll-spy.
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+        current = sections[sections.length - 1].getAttribute('id');
+      }
       navLinks.forEach(function(link) {
         link.style.background = '';
         if (link.getAttribute('href') === '#' + current) {

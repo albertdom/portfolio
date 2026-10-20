@@ -249,6 +249,11 @@
           current = section.getAttribute('id');
         }
       });
+      // Si se ha llegado (casi) al fondo, forzar la última sección: la última
+      // sección no siempre puede alcanzar la línea de activación del scroll-spy.
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+        current = sections[sections.length - 1].getAttribute('id');
+      }
       navLinks.forEach(function(link) {
         link.style.background = '';
         if (link.getAttribute('href') === '#' + current) {

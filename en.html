@@ -249,6 +249,11 @@
           current = section.getAttribute('id');
         }
       });
+      // If scrolled (near) the bottom, force the last section: the last
+      // section can't always reach the scroll-spy activation line.
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+        current = sections[sections.length - 1].getAttribute('id');
+      }
       navLinks.forEach(function(link) {
         link.style.background = '';
         if (link.getAttribute('href') === '#' + current) {
