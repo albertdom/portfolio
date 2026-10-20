@@ -138,19 +138,23 @@ nav {
 }
 .hero-ctas { display: flex; gap: var(--s-8); flex-wrap: wrap; }
 
-/* Una sola entrada orquestada al cargar */
-@media (prefers-reduced-motion: no-preference) {
-  .hero-name, .hero-role, .hero-bio, .hero-ctas {
-    opacity: 0; animation: rise 0.72s cubic-bezier(0.22,1,0.36,1) forwards;
-  }
-  .hero-name { animation-delay: 0.04s; }
-  .hero-role { animation-delay: 0.14s; }
-  .hero-bio  { animation-delay: 0.24s; }
-  .hero-ctas { animation-delay: 0.34s; }
+/* Difusión: el nombre emerge del "ruido" al cargar (momento signature);
+   el texto traducido se re-difunde al canviar d'idioma. */
+.hero-name.denoise { animation: name-denoise 0.95s cubic-bezier(0.2,0.75,0.2,1) both; }
+@keyframes name-denoise {
+  0%   { opacity: 0; filter: blur(16px); letter-spacing: 0.22em; }
+  55%  { opacity: 1; }
+  100% { opacity: 1; filter: blur(0); letter-spacing: -0.015em; }
 }
-@keyframes rise {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: none; }
+
+.diffusing { animation: text-denoise 0.5s ease both; will-change: filter, opacity; }
+@keyframes text-denoise {
+  0%   { opacity: 0.12; filter: blur(7px); }
+  100% { opacity: 1; filter: blur(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-name.denoise, .diffusing { animation: none; }
 }
 
 /* ── Sections ────────────────────────── */

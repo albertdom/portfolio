@@ -19,6 +19,11 @@
   <meta name="twitter:description" content="Desarrollador web y de IA. App publicada, software en producción y herramientas de IA propias.">
   <meta name="twitter:image" content="https://albertdomenech.dev/og.png">
 
+  <link rel="alternate" hreflang="es" href="https://albertdomenech.dev/?lang=es">
+  <link rel="alternate" hreflang="ca" href="https://albertdomenech.dev/?lang=ca">
+  <link rel="alternate" hreflang="en" href="https://albertdomenech.dev/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://albertdomenech.dev/">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
@@ -31,14 +36,14 @@
       <a href="#hero" class="nav-logo" aria-label="Albert Domènech — inicio">A<span class="expand">lbert </span>D<span class="expand">omènech</span></a>
       <div class="nav-right">
         <ul class="nav-links">
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Proyectos</a></li>
-          <li><a href="#contact">Contacto</a></li>
+          <li><a href="#skills" data-i18n="navSkills">Skills</a></li>
+          <li><a href="#projects" data-i18n="navProjects">Proyectos</a></li>
+          <li><a href="#contact" data-i18n="navContact">Contacto</a></li>
         </ul>
         <div class="nav-lang">
-          <a href="index.html" class="active">ES</a>
-          <a href="ca.html">CA</a>
-          <a href="en.html">EN</a>
+          <a href="?lang=es" data-lang="es" class="active">ES</a>
+          <a href="?lang=ca" data-lang="ca">CA</a>
+          <a href="?lang=en" data-lang="en">EN</a>
         </div>
       </div>
     </div>
@@ -49,10 +54,10 @@
     <section id="hero">
       <div class="container">
         <h1 class="hero-name">Albert Domènech</h1>
-        <p class="hero-role">Desarrollador web y de IA. Freelance, y en prácticas de I+D en IA.</p>
-        <p class="hero-bio">Construyo producto de principio a fin dirigiendo agentes de IA y revisando cada línea: desde una app Android publicada en Google Play con cientos de usuarios, hasta software a medida en producción para clientes reales. Ahora, en prácticas, levanto un sistema interno de agentes y RAG en una empresa industrial. Me mueve la IA, la automatización y crear cosas que de verdad funcionan.</p>
+        <p class="hero-role" data-i18n="heroRole">Desarrollador web y de IA. Freelance, y en prácticas de I+D en IA.</p>
+        <p class="hero-bio" data-i18n="heroBio">Construyo producto de principio a fin dirigiendo agentes de IA y revisando cada línea: desde una app Android publicada en Google Play con cientos de usuarios, hasta software a medida en producción para clientes reales. Ahora, en prácticas, levanto un sistema interno de agentes y RAG en una empresa industrial. Me mueve la IA, la automatización y crear cosas que de verdad funcionan.</p>
         <div class="hero-ctas">
-          <a href="#projects" class="btn-primary">Ver proyectos</a>
+          <a href="#projects" class="btn-primary" data-i18n="heroCta">Ver proyectos</a>
           <a href="https://github.com/albertdom" target="_blank" rel="noopener" class="btn-outlined">GitHub</a>
         </div>
       </div>
@@ -61,11 +66,10 @@
     <!-- SKILLS -->
     <section id="skills">
       <div class="container">
-        <p class="section-label">Skills</p>
+        <p class="section-label" data-i18n="skillsLabel">Skills</p>
         <div class="skills-groups">
-
           <div>
-            <p class="skill-group-label">Principal</p>
+            <p class="skill-group-label" data-i18n="g1">Principal</p>
             <div class="badges">
               <span class="badge badge-accent">Laravel</span>
               <span class="badge badge-accent">PHP</span>
@@ -74,30 +78,27 @@
               <span class="badge badge-accent">C / C++</span>
             </div>
           </div>
-
           <div>
-            <p class="skill-group-label">IA &amp; Backend</p>
+            <p class="skill-group-label" data-i18n="g2">IA &amp; Backend</p>
             <div class="badges">
               <span class="badge">Python</span>
               <span class="badge">FastAPI</span>
               <span class="badge">Spring Boot</span>
               <span class="badge">RAG</span>
-              <span class="badge">Servidores MCP</span>
+              <span class="badge" data-i18n="mcp">Servidores MCP</span>
             </div>
           </div>
-
           <div>
-            <p class="skill-group-label">Frontend &amp; DevOps</p>
+            <p class="skill-group-label" data-i18n="g3">Frontend &amp; DevOps</p>
             <div class="badges">
               <span class="badge">React</span>
               <span class="badge">React Native (Expo)</span>
               <span class="badge">Inertia</span>
               <span class="badge">Git</span>
               <span class="badge">GitHub Actions</span>
-              <span class="badge">Deploy OVH</span>
+              <span class="badge" data-i18n="ovh">Deploy OVH</span>
             </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -105,22 +106,18 @@
     <!-- PROJECTS -->
     <section id="projects">
       <div class="container">
-        <p class="section-label">Proyectos</p>
+        <p class="section-label" data-i18n="projectsLabel">Proyectos</p>
         <div class="projects-grid">
 
-          <!-- ForoPlus (destacado) -->
           <div class="project-card featured">
             <div class="project-header">
               <span class="project-name">ForoPlus</span>
-              <span class="tag-status live">En Google Play</span>
+              <span class="tag-status live" data-i18n="foroStatus">En Google Play</span>
             </div>
-            <p class="project-desc">Cliente Android no oficial para un foro de más de un millón de usuarios. Arquitectura propia "WebView-motor + interfaz 100 % nativa" en Kotlin, inmune a Cloudflare por diseño, con un sistema de auto-reparación de selectores determinista (sin LLM) y suite de tests con CI. Publicada en Google Play, con cientos de usuarios activos y una comunidad de testers que guía el roadmap.</p>
+            <p class="project-desc" data-i18n="foroDesc">Cliente Android no oficial para un foro de más de un millón de usuarios. Arquitectura propia "WebView-motor + interfaz 100 % nativa" en Kotlin, inmune a Cloudflare por diseño, con un sistema de auto-reparación de selectores determinista (sin LLM) y suite de tests con CI. Publicada en Google Play, con cientos de usuarios activos y una comunidad de testers que guía el roadmap.</p>
             <div class="project-footer">
               <div class="badges">
-                <span class="badge">Kotlin</span>
-                <span class="badge">Android</span>
-                <span class="badge">WebView</span>
-                <span class="badge">CI / Tests</span>
+                <span class="badge">Kotlin</span><span class="badge">Android</span><span class="badge">WebView</span><span class="badge">CI / Tests</span>
               </div>
               <div style="display:flex;gap:18px;">
                 <a href="https://github.com/neonforger/foroplus" target="_blank" rel="noopener" class="project-link">Repo</a>
@@ -129,70 +126,50 @@
             </div>
           </div>
 
-          <!-- Gestión de cocina -->
           <div class="project-card">
             <div class="project-header">
-              <span class="project-name">Gestión de cocina (freelance)</span>
-              <span class="tag-status live">En producción</span>
+              <span class="project-name" data-i18n="kitchenName">Gestión de cocina (freelance)</span>
+              <span class="tag-status live" data-i18n="kitchenStatus">En producción</span>
             </div>
-            <p class="project-desc">Software a medida para la cocina de una residencia: menús, inventario y comandas a proveedores (con envío por WhatsApp y exportación a PDF/Excel). En uso real desde 2026; proyecto freelance retribuido. Convertido además en un fork-producto para vender a grupos de residencias.</p>
+            <p class="project-desc" data-i18n="kitchenDesc">Software a medida para la cocina de una residencia: menús, inventario y comandas a proveedores (con envío por WhatsApp y exportación a PDF/Excel). En uso real desde 2026; proyecto freelance retribuido. Convertido además en un fork-producto para vender a grupos de residencias.</p>
             <div class="project-footer">
-              <div class="badges">
-                <span class="badge">Laravel</span>
-                <span class="badge">React</span>
-                <span class="badge">Inertia</span>
-              </div>
-              <span class="project-note">Código cerrado</span>
+              <div class="badges"><span class="badge">Laravel</span><span class="badge">React</span><span class="badge">Inertia</span></div>
+              <span class="project-note" data-i18n="closed">Código cerrado</span>
             </div>
           </div>
 
-          <!-- Reelcipe -->
           <div class="project-card">
             <div class="project-header">
               <span class="project-name">Reelcipe</span>
-              <span class="tag-status">En desarrollo</span>
+              <span class="tag-status" data-i18n="reelStatus">En desarrollo</span>
             </div>
-            <p class="project-desc">App móvil que convierte un reel de cocina de Instagram o TikTok en una receta estructurada (ingredientes, cantidades y pasos). Backend en FastAPI con contrato OpenAPI tipado y app en React Native. Proyecto a dos, llevando producto y metodología.</p>
+            <p class="project-desc" data-i18n="reelDesc">App móvil que convierte un reel de cocina de Instagram o TikTok en una receta estructurada (ingredientes, cantidades y pasos). Backend en FastAPI con contrato OpenAPI tipado y app en React Native. Proyecto a dos, llevando producto y metodología.</p>
             <div class="project-footer">
-              <div class="badges">
-                <span class="badge">React Native</span>
-                <span class="badge">Expo</span>
-                <span class="badge">FastAPI</span>
-              </div>
-              <span class="project-note">Código cerrado</span>
+              <div class="badges"><span class="badge">React Native</span><span class="badge">Expo</span><span class="badge">FastAPI</span></div>
+              <span class="project-note" data-i18n="closed">Código cerrado</span>
             </div>
           </div>
 
-          <!-- cdp-mcp -->
           <div class="project-card">
             <div class="project-header">
               <span class="project-name">cdp-mcp</span>
-              <span class="tag-status">Herramienta</span>
+              <span class="tag-status" data-i18n="cdpStatus">Herramienta</span>
             </div>
-            <p class="project-desc">Servidor MCP que embebe un proxy (mitmproxy) para dar a un agente de IA capacidades tipo Burp Suite —interceptar, reenviar, fuzzear, analizar y exportar tráfico HTTP/HTTPS— dirigidas por lenguaje natural. 14 herramientas, con tests.</p>
+            <p class="project-desc" data-i18n="cdpDesc">Servidor MCP que embebe un proxy (mitmproxy) para dar a un agente de IA capacidades tipo Burp Suite —interceptar, reenviar, fuzzear, analizar y exportar tráfico HTTP/HTTPS— dirigidas por lenguaje natural. 14 herramientas, con tests.</p>
             <div class="project-footer">
-              <div class="badges">
-                <span class="badge">Python</span>
-                <span class="badge">MCP</span>
-                <span class="badge">Seguridad</span>
-              </div>
+              <div class="badges"><span class="badge">Python</span><span class="badge">MCP</span><span class="badge" data-i18n="security">Seguridad</span></div>
               <a href="https://github.com/albertdom/cdp-mcp" target="_blank" rel="noopener" class="project-link">Repo</a>
             </div>
           </div>
 
-          <!-- CepAlert -->
           <div class="project-card">
             <div class="project-header">
               <span class="project-name">CepAlert</span>
-              <span class="tag-status">Proyecto personal</span>
+              <span class="tag-status" data-i18n="cepStatus">Proyecto personal</span>
             </div>
-            <p class="project-desc">App Android que predice zonas de setas (Boletus edulis) en los Pirineos: mapa con MapLibre, scoring geoespacial por zona y un pipeline de datos diario que combina meteorología (Open-Meteo, AEMET) y variables de suelo.</p>
+            <p class="project-desc" data-i18n="cepDesc">App Android que predice zonas de setas (Boletus edulis) en los Pirineos: mapa con MapLibre, scoring geoespacial por zona y un pipeline de datos diario que combina meteorología (Open-Meteo, AEMET) y variables de suelo.</p>
             <div class="project-footer">
-              <div class="badges">
-                <span class="badge">Kotlin</span>
-                <span class="badge">MapLibre</span>
-                <span class="badge">Python</span>
-              </div>
+              <div class="badges"><span class="badge">Kotlin</span><span class="badge">MapLibre</span><span class="badge">Python</span></div>
               <a href="https://github.com/albertdom/CepAlert" target="_blank" rel="noopener" class="project-link">Repo</a>
             </div>
           </div>
@@ -204,38 +181,27 @@
     <!-- CONTACT -->
     <section id="contact">
       <div class="container">
-        <p class="section-label">Contacto</p>
+        <p class="section-label" data-i18n="contactLabel">Contacto</p>
         <div class="contact-list">
 
           <a href="mailto:domenechobiol@gmail.com" class="contact-item">
-            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="4" width="20" height="16" rx="2"/>
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-            </svg>
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             domenechobiol@gmail.com
           </a>
 
           <a href="https://www.linkedin.com/in/albert-domenech-8b9393314" target="_blank" rel="noopener" class="contact-item">
-            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-              <rect x="2" y="9" width="4" height="12"/>
-              <circle cx="4" cy="4" r="2"/>
-            </svg>
-            Albert Domènech en LinkedIn
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <span data-i18n="linkedin">Albert Domènech en LinkedIn</span>
           </a>
 
           <a href="https://github.com/albertdom" target="_blank" rel="noopener" class="contact-item">
-            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-            </svg>
-            github.com/albertdom <span class="contact-note">(perfil principal)</span>
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            github.com/albertdom&nbsp;<span class="contact-note" data-i18n="noteMain">(perfil principal)</span>
           </a>
 
           <a href="https://github.com/neonforger" target="_blank" rel="noopener" class="contact-item">
-            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-            </svg>
-            github.com/neonforger <span class="contact-note">(ForoPlus)</span>
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            github.com/neonforger&nbsp;<span class="contact-note" data-i18n="noteForo">(ForoPlus)</span>
           </a>
 
         </div>
@@ -244,39 +210,153 @@
   </main>
 
   <footer>
-    <div class="container">
-      © 2026 Albert Domènech
-    </div>
+    <div class="container">© 2026 Albert Domènech</div>
   </footer>
 
   <script>
+    var I18N = {
+      es: {
+        title:"Albert Domènech — Web & AI Developer",
+        desc:"Albert Domènech — desarrollador web y de IA. App Android publicada en Google Play, software a medida en producción y herramientas de IA propias.",
+        navSkills:"Skills", navProjects:"Proyectos", navContact:"Contacto",
+        heroRole:"Desarrollador web y de IA. Freelance, y en prácticas de I+D en IA.",
+        heroBio:"Construyo producto de principio a fin dirigiendo agentes de IA y revisando cada línea: desde una app Android publicada en Google Play con cientos de usuarios, hasta software a medida en producción para clientes reales. Ahora, en prácticas, levanto un sistema interno de agentes y RAG en una empresa industrial. Me mueve la IA, la automatización y crear cosas que de verdad funcionan.",
+        heroCta:"Ver proyectos",
+        skillsLabel:"Skills", g1:"Principal", g2:"IA & Backend", g3:"Frontend & DevOps",
+        mcp:"Servidores MCP", ovh:"Deploy OVH", security:"Seguridad",
+        projectsLabel:"Proyectos",
+        foroStatus:"En Google Play",
+        foroDesc:"Cliente Android no oficial para un foro de más de un millón de usuarios. Arquitectura propia \"WebView-motor + interfaz 100 % nativa\" en Kotlin, inmune a Cloudflare por diseño, con un sistema de auto-reparación de selectores determinista (sin LLM) y suite de tests con CI. Publicada en Google Play, con cientos de usuarios activos y una comunidad de testers que guía el roadmap.",
+        kitchenName:"Gestión de cocina (freelance)", kitchenStatus:"En producción",
+        kitchenDesc:"Software a medida para la cocina de una residencia: menús, inventario y comandas a proveedores (con envío por WhatsApp y exportación a PDF/Excel). En uso real desde 2026; proyecto freelance retribuido. Convertido además en un fork-producto para vender a grupos de residencias.",
+        closed:"Código cerrado",
+        reelStatus:"En desarrollo",
+        reelDesc:"App móvil que convierte un reel de cocina de Instagram o TikTok en una receta estructurada (ingredientes, cantidades y pasos). Backend en FastAPI con contrato OpenAPI tipado y app en React Native. Proyecto a dos, llevando producto y metodología.",
+        cdpStatus:"Herramienta",
+        cdpDesc:"Servidor MCP que embebe un proxy (mitmproxy) para dar a un agente de IA capacidades tipo Burp Suite —interceptar, reenviar, fuzzear, analizar y exportar tráfico HTTP/HTTPS— dirigidas por lenguaje natural. 14 herramientas, con tests.",
+        cepStatus:"Proyecto personal",
+        cepDesc:"App Android que predice zonas de setas (Boletus edulis) en los Pirineos: mapa con MapLibre, scoring geoespacial por zona y un pipeline de datos diario que combina meteorología (Open-Meteo, AEMET) y variables de suelo.",
+        contactLabel:"Contacto", linkedin:"Albert Domènech en LinkedIn", noteMain:"(perfil principal)", noteForo:"(ForoPlus)"
+      },
+      ca: {
+        title:"Albert Domènech — Desenvolupador web i IA",
+        desc:"Albert Domènech — desenvolupador web i de IA. App Android publicada a Google Play, programari a mida en producció i eines d'IA pròpies.",
+        navSkills:"Habilitats", navProjects:"Projectes", navContact:"Contacte",
+        heroRole:"Desenvolupador web i de IA. Freelance, i de pràctiques a R+D en IA.",
+        heroBio:"Construeixo producte de principi a fi dirigint agents d'IA i revisant cada línia: des d'una app Android publicada a Google Play amb centenars d'usuaris, fins a programari a mida en producció per a clients reals. Ara, de pràctiques, aixeco un sistema intern d'agents i RAG en una empresa industrial. Em mou la IA, l'automatització i crear coses que de debò funcionen.",
+        heroCta:"Veure projectes",
+        skillsLabel:"Habilitats", g1:"Principal", g2:"IA i Backend", g3:"Frontend i DevOps",
+        mcp:"Servidors MCP", ovh:"Desplegament OVH", security:"Seguretat",
+        projectsLabel:"Projectes",
+        foroStatus:"A Google Play",
+        foroDesc:"Client Android no oficial per a un fòrum de més d'un milió d'usuaris. Arquitectura pròpia «WebView-motor + interfície 100 % nativa» en Kotlin, immune a Cloudflare per disseny, amb un sistema d'autoreparació de selectors determinista (sense LLM) i una suite de tests amb CI. Publicada a Google Play, amb centenars d'usuaris actius i una comunitat de testers que guia el full de ruta.",
+        kitchenName:"Gestió de cuina (freelance)", kitchenStatus:"En producció",
+        kitchenDesc:"Programari a mida per a la cuina d'una residència: menús, inventari i comandes a proveïdors (amb enviament per WhatsApp i exportació a PDF/Excel). En ús real des del 2026; projecte freelance retribuït. A més, convertit en un fork-producte per vendre a grups de residències.",
+        closed:"Codi tancat",
+        reelStatus:"En desenvolupament",
+        reelDesc:"App mòbil que converteix un reel de cuina d'Instagram o TikTok en una recepta estructurada (ingredients, quantitats i passos). Backend en FastAPI amb contracte OpenAPI tipat i app en React Native. Projecte entre dos, portant producte i metodologia.",
+        cdpStatus:"Eina",
+        cdpDesc:"Servidor MCP que incrusta un proxy (mitmproxy) per donar a un agent d'IA capacitats tipus Burp Suite —interceptar, reenviar, fer fuzzing, analitzar i exportar trànsit HTTP/HTTPS— dirigides per llenguatge natural. 14 eines, amb tests.",
+        cepStatus:"Projecte personal",
+        cepDesc:"App Android que prediu zones de bolets (Boletus edulis) als Pirineus: mapa amb MapLibre, scoring geoespacial per zona i un pipeline de dades diari que combina meteorologia (Open-Meteo, AEMET) i variables de sòl.",
+        contactLabel:"Contacte", linkedin:"Albert Domènech a LinkedIn", noteMain:"(perfil principal)", noteForo:"(ForoPlus)"
+      },
+      en: {
+        title:"Albert Domènech — Web & AI Developer",
+        desc:"Albert Domènech — web & AI developer. Android app published on Google Play, custom software in production and in-house AI tooling.",
+        navSkills:"Skills", navProjects:"Projects", navContact:"Contact",
+        heroRole:"Web & AI developer. Freelance, and an AI R&D intern.",
+        heroBio:"I build products end to end by directing AI agents and reviewing every line: from an Android app published on Google Play with hundreds of users, to custom software running in production for real clients. Right now, as an intern, I'm building an internal agents and RAG system at an industrial company. I'm driven by AI, automation, and shipping things that actually work.",
+        heroCta:"View projects",
+        skillsLabel:"Skills", g1:"Core", g2:"AI & Backend", g3:"Frontend & DevOps",
+        mcp:"MCP servers", ovh:"OVH deploy", security:"Security",
+        projectsLabel:"Projects",
+        foroStatus:"On Google Play",
+        foroDesc:"Unofficial Android client for a forum with over a million users. Custom \"WebView-engine + 100% native UI\" architecture in Kotlin, immune to Cloudflare by design, with a deterministic (LLM-free) selector self-healing system and a CI-backed test suite. Published on Google Play, with hundreds of active users and a testers community that drives the roadmap.",
+        kitchenName:"Kitchen management (freelance)", kitchenStatus:"In production",
+        kitchenDesc:"Custom software for a care-home kitchen: menus, inventory and supplier orders (with WhatsApp delivery and PDF/Excel export). In real use since 2026; paid freelance project. Also turned into a product fork to sell to care-home groups.",
+        closed:"Closed source",
+        reelStatus:"In development",
+        reelDesc:"Mobile app that turns an Instagram or TikTok cooking reel into a structured recipe (ingredients, quantities and steps). FastAPI backend with a typed OpenAPI contract and a React Native app. A two-person project where I lead product and methodology.",
+        cdpStatus:"Tool",
+        cdpDesc:"MCP server that embeds a proxy (mitmproxy) to give an AI agent Burp Suite–style capabilities —intercept, replay, fuzz, analyze and export HTTP/HTTPS traffic— driven by natural language. 14 tools, with tests.",
+        cepStatus:"Personal project",
+        cepDesc:"Android app that predicts porcini (Boletus edulis) zones in the Pyrenees: a MapLibre map, per-zone geospatial scoring and a daily data pipeline combining weather (Open-Meteo, AEMET) and soil variables.",
+        contactLabel:"Contact", linkedin:"Albert Domènech on LinkedIn", noteMain:"(main profile)", noteForo:"(ForoPlus)"
+      }
+    };
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var i18nEls = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
+
+    function setLang(lang, animate) {
+      var dict = I18N[lang]; if (!dict) return;
+      document.documentElement.lang = lang;
+      document.title = dict.title;
+      var md = document.querySelector('meta[name="description"]'); if (md) md.setAttribute('content', dict.desc);
+
+      i18nEls.forEach(function(el, i) {
+        var key = el.getAttribute('data-i18n');
+        if (dict[key] != null) el.textContent = dict[key];
+        if (animate && !reduceMotion) {
+          el.classList.remove('diffusing');
+          void el.offsetWidth;            // reinicia la animación
+          el.style.animationDelay = Math.min(i * 18, 220) + 'ms';
+          el.classList.add('diffusing');
+        }
+      });
+
+      document.querySelectorAll('.nav-lang a').forEach(function(a) {
+        a.classList.toggle('active', a.getAttribute('data-lang') === lang);
+      });
+
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+      var url = new URL(window.location.href);
+      url.searchParams.set('lang', lang);
+      history.replaceState(null, '', url);
+    }
+
+    // Idioma inicial: ?lang= → localStorage → navegador → es
+    (function initLang() {
+      var p = new URLSearchParams(location.search).get('lang');
+      var stored; try { stored = localStorage.getItem('lang'); } catch (e) {}
+      var navLang = (navigator.language || 'es').slice(0,2);
+      var lang = [p, stored, navLang, 'es'].find(function(l){ return l && I18N[l]; });
+      setLang(lang, false);
+      // Difusión del nombre al cargar (momento signature)
+      var name = document.querySelector('.hero-name');
+      if (name && !reduceMotion) { name.classList.add('denoise'); }
+    })();
+
+    // Cambio de idioma in-place (sin recargar) + re-difusión del texto
+    document.querySelectorAll('.nav-lang a').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        setLang(a.getAttribute('data-lang'), true);
+      });
+    });
+
+    // ── Nav: resaltado de sección + logo que se despliega ──
     var sections = document.querySelectorAll('section[id]');
-    var navLinks = document.querySelectorAll('.nav-links a');
+    var navAnchors = document.querySelectorAll('.nav-links a');
     var logo = document.querySelector('.nav-logo');
 
     function updateActiveNav() {
       var current = '';
       sections.forEach(function(section) {
-        if (window.scrollY >= section.offsetTop - 80) {
-          current = section.getAttribute('id');
-        }
+        if (window.scrollY >= section.offsetTop - 80) current = section.getAttribute('id');
       });
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
         current = sections[sections.length - 1].getAttribute('id');
       }
-      navLinks.forEach(function(link) {
+      navAnchors.forEach(function(link) {
         link.style.background = '';
-        if (link.getAttribute('href') === '#' + current) {
-          link.style.background = 'var(--surface)';
-        }
+        if (link.getAttribute('href') === '#' + current) link.style.background = 'var(--surface)';
       });
     }
-
     function updateLogo() {
-      if (window.scrollY > 260) { logo.classList.add('expanded'); }
-      else { logo.classList.remove('expanded'); }
+      if (window.scrollY > 260) logo.classList.add('expanded'); else logo.classList.remove('expanded');
     }
-
     function onScroll() { updateActiveNav(); updateLogo(); }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
