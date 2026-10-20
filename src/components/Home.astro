@@ -1,0 +1,114 @@
+---
+import { getCollection } from 'astro:content';
+import { ui, pick, type Lang, type Localized } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = ui[lang];
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+
+// Los textos traducidos llevan data-i18n: son los que se re-difunden al cambiar de idioma.
+const loc = (value: string | Localized) => (typeof value === 'string' ? {} : { 'data-i18n': '' });
+---
+
+<main>
+  <section id="hero">
+    <div class="container">
+      <h1 class="hero-name">Albert Domènech</h1>
+      <p class="hero-role" data-i18n>{s.heroRole}</p>
+      <p class="hero-bio" data-i18n>{s.heroBio}</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary" data-i18n>{s.heroCta}</a>
+        <a href="https://github.com/albertdom" target="_blank" rel="noopener" class="btn-outlined">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <p class="section-label" data-i18n>{s.skillsLabel}</p>
+      <div class="skills-groups">
+        <div>
+          <p class="skill-group-label" data-i18n>{s.g1}</p>
+          <div class="badges">
+            {['Laravel', 'PHP', 'Kotlin', 'Java', 'C / C++'].map((b) => <span class="badge badge-accent">{b}</span>)}
+          </div>
+        </div>
+        <div>
+          <p class="skill-group-label" data-i18n>{s.g2}</p>
+          <div class="badges">
+            {['Python', 'FastAPI', 'Spring Boot', 'RAG'].map((b) => <span class="badge">{b}</span>)}
+            <span class="badge" data-i18n>{s.mcp}</span>
+          </div>
+        </div>
+        <div>
+          <p class="skill-group-label" data-i18n>{s.g3}</p>
+          <div class="badges">
+            {['React', 'React Native (Expo)', 'Inertia', 'Git', 'GitHub Actions'].map((b) => <span class="badge">{b}</span>)}
+            <span class="badge" data-i18n>{s.ovh}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <p class="section-label" data-i18n>{s.projectsLabel}</p>
+      <div class="projects-grid">
+        {projects.map(({ data: p }) => (
+          <div class:list={['project-card', { featured: p.featured }]}>
+            <div class="project-header">
+              <span class="project-name" {...loc(p.name)}>{pick(p.name, lang)}</span>
+              <span class:list={['tag-status', { live: p.live }]} data-i18n>{p.status[lang]}</span>
+            </div>
+            <p class="project-desc" data-i18n>{p.description[lang]}</p>
+            <div class="project-footer">
+              <div class="badges">
+                {p.badges.map((b) => <span class="badge" {...loc(b)}>{pick(b, lang)}</span>)}
+              </div>
+              {p.closedSource && <span class="project-note" data-i18n>{s.closed}</span>}
+              {p.links.length === 1 && (
+                <a href={p.links[0].href} target="_blank" rel="noopener" class="project-link">{p.links[0].label}</a>
+              )}
+              {p.links.length > 1 && (
+                <div style="display:flex;gap:18px;">
+                  {p.links.map((l) => (
+                    <a href={l.href} target="_blank" rel="noopener" class="project-link">{l.label}</a>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <p class="section-label" data-i18n>{s.contactLabel}</p>
+      <div class="contact-list">
+        <a href="mailto:domenechobiol@gmail.com" class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+          domenechobiol@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/albert-domenech-8b9393314" target="_blank" rel="noopener" class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          <span data-i18n>{s.linkedin}</span>
+        </a>
+        <a href="https://github.com/albertdom" target="_blank" rel="noopener" class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          github.com/albertdom&nbsp;<span class="contact-note" data-i18n>{s.noteMain}</span>
+        </a>
+        <a href="https://github.com/neonforger" target="_blank" rel="noopener" class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          github.com/neonforger&nbsp;<span class="contact-note" data-i18n>{s.noteForo}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>

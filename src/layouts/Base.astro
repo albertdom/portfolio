@@ -1,0 +1,210 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import '../styles/global.css';
+import { ui, languages, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = ui[lang];
+const site = Astro.site ?? new URL('https://albertdomenech.dev');
+const langs = Object.keys(languages) as Lang[];
+const urlFor = (l: Lang) => new URL(getRelativeLocaleUrl(l), site).href;
+const canonical = urlFor(lang);
+const ogImage = new URL('/og.png', site).href;
+const ogLocale = { es: 'es_ES', ca: 'ca_ES', en: 'en_US' }[lang];
+---
+
+<!doctype html>
+<html lang={lang} transition:name="root" transition:animate="none">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{s.title}</title>
+    <meta name="description" content={s.desc} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" />
+    {langs.map((l) => <link rel="alternate" hreflang={l} href={urlFor(l)} />)}
+    <link rel="alternate" hreflang="x-default" href={urlFor('es')} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:title" content={s.title} />
+    <meta property="og:description" content={s.ogDesc} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={s.title} />
+    <meta name="twitter:description" content={s.twDesc} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    {lang === 'es' && (
+      <script is:inline>
+        // Compatibilidad con los enlaces antiguos /?lang=ca y /?lang=en
+        (function () {
+          var l = new URLSearchParams(location.search).get('lang');
+          if (l === 'ca' || l === 'en') location.replace('/' + l + '/' + location.hash);
+        })();
+      </script>
+    )}
+
+    <ClientRouter />
+  </head>
+  <body>
+    <nav aria-label={s.navLabel}>
+      <div class="nav-inner">
+        <a href="#hero" class="nav-logo" aria-label={s.logoLabel}>A<span class="expand">lbert </span>D<span class="expand">omènech</span></a>
+        <div class="nav-right">
+          <ul class="nav-links">
+            <li><a href="#skills" data-i18n>{s.navSkills}</a></li>
+            <li><a href="#projects" data-i18n>{s.navProjects}</a></li>
+            <li><a href="#contact" data-i18n>{s.navContact}</a></li>
+          </ul>
+          <div class="nav-lang">
+            {langs.map((l) => (
+              <a href={getRelativeLocaleUrl(l)} hreflang={l} class:list={[{ active: l === lang }]} aria-current={l === lang ? 'page' : undefined}>{languages[l]}</a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <slot />
+
+    <footer>
+      <div class="container">© 2026 Albert Domènech</div>
+    </footer>
+
+    <script>
+      // ── Difusión de texto: el ruido (caracteres aleatorios) se va resolviendo en las
+      //    palabras con sentido, como el denoising de un LLM de difusión. Una capa
+      //    fantasma con el texto final fija el tamaño, así el layout no se mueve. ──
+      type Diffusable = HTMLElement & { _raf?: number };
+
+      const NOISE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const randNoise = () => NOISE[(Math.random() * NOISE.length) | 0];
+      const isBlank = (c: string) => c === ' ' || c === ' ' || c === '\n';
+
+      function diffuse(el: Diffusable, finalText: string, duration: number) {
+        if (el._raf) cancelAnimationFrame(el._raf);
+        if (reduceMotion() || !finalText) {
+          el.classList.remove('df');
+          el.textContent = finalText;
+          return;
+        }
+        const chars = Array.from(finalText);
+        const n = chars.length;
+        const resolveAt = chars.map((ch, i) =>
+          isBlank(ch) ? 0 : (i / n) * duration * 0.6 + Math.random() * duration * 0.4,
+        );
+        const noise = chars.map(randNoise);
+
+        const ghost = document.createElement('span');
+        ghost.className = 'df-ghost';
+        ghost.textContent = finalText;
+        const live = document.createElement('span');
+        live.className = 'df-live';
+        live.setAttribute('aria-hidden', 'true');
+        if (getComputedStyle(el).display.startsWith('inline')) live.style.whiteSpace = 'nowrap';
+        el.textContent = '';
+        el.classList.add('df');
+        el.append(ghost, live);
+
+        const start = performance.now();
+        let lastNoise = 0;
+        const frame = (now: number) => {
+          const t = now - start;
+          let done = 0;
+          let out = '';
+          const refresh = now - lastNoise > 75; // el ruido cambia cada ~75 ms, no en cada frame
+          if (refresh) lastNoise = now;
+          for (let i = 0; i < n; i++) {
+            if (isBlank(chars[i]) || t >= resolveAt[i]) {
+              out += chars[i];
+              done++;
+            } else {
+              if (refresh) noise[i] = randNoise();
+              out += noise[i];
+            }
+          }
+          live.textContent = out;
+          if (done < n) el._raf = requestAnimationFrame(frame);
+          else {
+            el.classList.remove('df');
+            el.textContent = finalText;
+            el._raf = 0;
+          }
+        };
+        el._raf = requestAnimationFrame(frame);
+      }
+      const diffuseDur = (text: string) => Math.min(2400, Math.max(1300, 1100 + text.length * 5));
+
+      // ── Cambio de idioma con el router de Astro: sin recarga, mismo scroll,
+      //    y el texto nuevo se difunde. ──
+      const langOf = (url: URL) => {
+        const seg = url.pathname.split('/')[1];
+        return seg === 'ca' || seg === 'en' ? seg : 'es';
+      };
+      let firstLoad = true;
+      let langSwap = false;
+      let savedScroll = 0;
+
+      document.addEventListener('astro:before-preparation', (e) => {
+        const to = (e as Event & { to: URL }).to;
+        langSwap = langOf(to) !== document.documentElement.lang;
+        if (langSwap) savedScroll = window.scrollY;
+      });
+      document.addEventListener('astro:after-swap', () => {
+        if (langSwap) window.scrollTo({ left: 0, top: savedScroll, behavior: 'instant' });
+      });
+
+      // ── Nav: resaltado de sección + logo que se despliega ──
+      let sections: NodeListOf<HTMLElement> | null = null;
+      let navAnchors: NodeListOf<HTMLAnchorElement> | null = null;
+      let logo: HTMLElement | null = null;
+
+      function onScroll() {
+        if (!sections || !navAnchors || !logo) return;
+        let current = '';
+        sections.forEach((section) => {
+          if (window.scrollY >= section.offsetTop - 80) current = section.id;
+        });
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+          current = sections[sections.length - 1].id;
+        }
+        navAnchors.forEach((link) => {
+          link.style.background = link.getAttribute('href') === '#' + current ? 'var(--surface)' : '';
+        });
+        logo.classList.toggle('expanded', window.scrollY > 260);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      document.addEventListener('astro:page-load', () => {
+        sections = document.querySelectorAll<HTMLElement>('section[id]');
+        navAnchors = document.querySelectorAll<HTMLAnchorElement>('.nav-links a');
+        logo = document.querySelector<HTMLElement>('.nav-logo');
+
+        if (firstLoad) {
+          firstLoad = false;
+          const name = document.querySelector<HTMLElement>('.hero-name');
+          if (name) diffuse(name, name.textContent ?? '', 2200);
+        } else if (langSwap) {
+          langSwap = false;
+          document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
+            const txt = el.textContent ?? '';
+            diffuse(el, txt, diffuseDur(txt));
+          });
+        }
+        onScroll();
+      });
+    </script>
+  </body>
+</html>
