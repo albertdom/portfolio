@@ -386,38 +386,36 @@ footer {
 
 /* ── Responsive ─────────────────────────────────── */
 @media (max-width: 768px) {
+  .container { padding: 0 20px; }
+
   .hero-name {
     font-size: 40px;
     letter-spacing: -1px;
   }
 
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .nav-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-8);
-    padding-bottom: var(--spacing-8);
-  }
-
-  .nav-right { gap: var(--spacing-8); }
-
-  .nav-links { gap: 4px; }
-
-  .nav-links a {
-    padding: 8px 8px;
-    font-size: 13px;
-  }
+  #hero { padding: 48px 0 var(--spacing-64); }
 
   .hero-ctas {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
   }
+  .hero-ctas a { text-align: center; }
 
-  section:not(#hero),
-  #hero {
-    padding: var(--spacing-64) 0;
+  section:not(#hero) { padding: 56px 0; }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
   }
+  .project-card { padding: 22px; }
+
+  /* Cabecera compacta de una sola fila: solo logo + selector de idioma.
+     En una pantalla estrecha los enlaces de sección apelotonaban la barra. */
+  .nav-inner { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .nav-lang { padding-left: 0; border-left: none; }
+
+  /* Contacto: la nota ("— perfil principal") baja a su línea bajo el handle,
+     con el icono alineado arriba en vez de partirse desalineada. */
+  .contact-item { align-items: flex-start; gap: 12px; }
+  .contact-note { display: block; }
 }
