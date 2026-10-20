@@ -414,8 +414,9 @@ footer {
   .nav-links { display: none; }
   .nav-lang { padding-left: 0; border-left: none; }
 
-  /* Contacto: la nota ("— perfil principal") baja a su línea bajo el handle,
-     con el icono alineado arriba en vez de partirse desalineada. */
-  .contact-item { align-items: flex-start; gap: 12px; }
-  .contact-note { display: block; }
+  /* Contacto: la nota ("— perfil principal") baja a su propia línea,
+     indentada bajo el handle (ancho del icono 20px + gap 12px), en vez de
+     partirse desalineada a la derecha. */
+  .contact-item { gap: 12px; flex-wrap: wrap; }
+  .contact-note { flex-basis: 100%; margin-left: 32px; }
 }
