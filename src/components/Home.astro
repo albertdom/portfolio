@@ -22,6 +22,7 @@ const loc = (value: string | Localized) => (typeof value === 'string' ? {} : { '
       <p class="hero-bio" data-i18n>{s.heroBio}</p>
       <div class="hero-ctas">
         <a href="#projects" class="btn-primary" data-i18n>{s.heroCta}</a>
+        <a href={`/cv/Albert_Domenech_CV_${lang.toUpperCase()}.pdf`} target="_blank" rel="noopener" class="btn-outlined" data-i18n>{s.cv}</a>
         <a href="https://github.com/albertdom" target="_blank" rel="noopener" class="btn-outlined">GitHub</a>
       </div>
     </div>
